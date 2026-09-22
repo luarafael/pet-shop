@@ -1,0 +1,14 @@
+services:
+  petshop-db:
+    image: mysql:8.4
+    container_name: petshop-banco
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: petshop
+      MYSQL_USER: petshop
+      MYSQL_PASSWORD: petshop
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/petshop.sql:/docker-entrypoint-initdb.d/petshop.sql:ro
