@@ -16,12 +16,12 @@ const conexao = mysql.createPool({
 });
 
 app.get("/cachorros", async (req, res) => {
-  const [cachorros] = await connection.query("SELECT * FROM cachorro");
+  const [cachorros] = await conexao.query("SELECT * FROM cachorro");
   res.json(cachorros);
 });
 
 app.get("/gato", async (req, res) => {
-  const [gatos] = await connection.query("SELECT * FROM gato");
+  const [gatos] = await conexao.query("SELECT * FROM gato");
   res.json(gatos);
 });
 
