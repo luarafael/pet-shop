@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 const conexao = mysql.createPool({
-  host: "petshop",
+  host: "petshop-db",
   user: "petshop",
   password: "petshop",
   database: "petshop",
