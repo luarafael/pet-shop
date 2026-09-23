@@ -3,10 +3,10 @@ services:
     image: mysql:8.4
     container_name: petshop-banco
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: petshop
-      MYSQL_USER: petshop
-      MYSQL_PASSWORD: petshop
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD_ROOT}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
@@ -18,6 +18,11 @@ services:
     container_name: petshop-api-container
     ports:
       - "3000:3000"
+    environment:
+      - DB_HOST=petshop-db
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
     depends_on:
       - petshop-db
   petshop-telinha:
