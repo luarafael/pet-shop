@@ -15,14 +15,25 @@ const conexao = mysql.createPool({
   database: "petshop",
 });
 
-app.get("/cachorros", async (req, res) => {
-  const [cachorros] = await conexao.query("SELECT * FROM cachorro");
-  res.json(cachorros);
+app.get("/clientes", async (req, res) => {
+  const [clientes] = await conexao.query("SELECT * FROM cliente");
+  res.json(clientes);
 });
 
-app.get("/gato", async (req, res) => {
-  const [gatos] = await conexao.query("SELECT * FROM gato");
-  res.json(gatos);
+app.get("/pet", async (req, res) => {
+  const [pets] = await conexao.query(` 
+      SELECT 
+        pet.id AS pet_id,
+        pet.nome AS pet_nome,
+        pet.raca AS pet_raca,
+        pet.idade AS pet_idade,
+        cliente.id AS cliente_id,
+        cliente.nome AS cliente_nome,
+        cliente.telefone AS cliente_telefone
+      FROM pet
+      JOIN cliente ON pet.cliente_id = cliente.id
+    `);
+  res.json(pets);
 });
 
 app.listen(PORT, () => {
