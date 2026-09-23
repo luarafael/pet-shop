@@ -12,3 +12,22 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./database/petshop.sql:/docker-entrypoint-initdb.d/petshop.sql:ro
+  petshop-api:
+    build: ./backend
+    image: petshop-api-imagem
+    container_name: petshop-api-container
+    ports:
+      - "3000:3000"
+    depends_on:
+      - petshop-db
+  petshop-telinha:
+    build: ./frontend
+    image: petshop-front-imagem
+    container_name: petshop-front-container
+    ports:
+      - "5173:5173"
+    depends_on:
+      - petshop-api
+
+volumes:
+  db_data:
